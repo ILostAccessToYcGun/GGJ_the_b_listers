@@ -2,14 +2,12 @@ using UnityEngine;
 
 public class PlayerLance : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Init()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Runtime()
     {
         
     }
