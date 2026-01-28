@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerLance playerLance;
+    [SerializeField] PlayerCamera playerCamera;
 
     private PlayerInput _inputActions;
 
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
 
         playerMovement.Init();
         playerLance.Init();
+        playerCamera.Init();
     }
 
     void OnDestroy()
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
         };
 
         playerMovement.Runtime(characterInput);
+        playerCamera.Runtime(playerMovement.gameObject.transform.position);
 
         /*
         //Get camera input and update Cam Rotation
