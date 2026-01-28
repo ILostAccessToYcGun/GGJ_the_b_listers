@@ -598,17 +598,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7950283e62b5db94a8f8b2bc5418d550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  afterburnerMultiplier: 1.3
   spriteRenderer: {fileID: 966287283}
+  rb: {fileID: 0}
+  moveSpeed: 35
+  afterburnerMultiplier: 1.25
+  idleGravity: 0.3
   quadrant1Poses:
     _serializedList:
-    - Key: {fileID: 8792343726959412212, guid: 1627ee173bc6a0d498b070b859ad7847, type: 3}
-      Value: 0
-    - Key: {fileID: 7813679697092408722, guid: 1627ee173bc6a0d498b070b859ad7847, type: 3}
-      Value: 4
-    - Key: {fileID: 6492278008286248558, guid: 1627ee173bc6a0d498b070b859ad7847, type: 3}
-      Value: 2
+    - Key: 0
+      Value: {fileID: 8792343726959412212, guid: 1627ee173bc6a0d498b070b859ad7847, type: 3}
+    - Key: 1
+      Value: {fileID: 7813679697092408722, guid: 1627ee173bc6a0d498b070b859ad7847, type: 3}
+    - Key: 2
+      Value: {fileID: 6492278008286248558, guid: 1627ee173bc6a0d498b070b859ad7847, type: 3}
 --- !u!50 &1717819513
 Rigidbody2D:
   serializedVersion: 5
@@ -622,9 +624,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 0.5
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -714,8 +716,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27d2044aa744194c863094cb8d9ceee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 0}
-  playerLance: {fileID: 0}
+  playerMovement: {fileID: 1717819512}
+  playerLance: {fileID: 1717819515}
 --- !u!4 &1919840546
 Transform:
   m_ObjectHideFlags: 0
