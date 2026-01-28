@@ -27,8 +27,14 @@ public class Player : MonoBehaviour
         var input = _inputActions.Player;
         var ui = _inputActions.UI;
 
+        var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
 
-        playerMovement.Runtime();
+        var characterInput = new CharacterInput
+        {
+            Thrust = input.Thrust.IsPressed(),
+        };
+
+        playerMovement.Runtime(characterInput);
 
         /*
         //Get camera input and update Cam Rotation

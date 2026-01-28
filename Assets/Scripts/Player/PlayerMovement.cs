@@ -11,8 +11,12 @@ public struct CharacterState
 
 public struct CharacterInput
 {
-    public Quaternion Rotation;
     public bool Thrust;
+}
+
+public struct CameraInput
+{
+    public Vector2 Look;
 }
 
 public enum Pose
@@ -35,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float engineForce = 3500f;
     [Range(1f, 2f)]
     [SerializeField] private float afterburnerMultiplier = 1.5f;
     [Space]
@@ -58,10 +63,10 @@ public class PlayerMovement : MonoBehaviour
         _cam = Camera.main;
     }
 
-    public void Runtime()
+    public void Runtime(CharacterInput characterInput)
     {
         if (_cam == null) _cam = Camera.main;
-        _isThrusting = Input.GetKey(KeyCode.W);
+        _isThrusting = characterInput.Thrust;
 
         Vector3 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0f;
