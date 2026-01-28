@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
     //this will be the main script that runs other components
     //like movement, shooting, vision
 
+    [SerializeField] EnemyMovement movement;
+
 
     void Start()
     {
