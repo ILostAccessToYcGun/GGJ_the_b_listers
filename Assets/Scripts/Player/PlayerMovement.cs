@@ -43,9 +43,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float linearDrag = 1f;
 
     [Space]
-    [Range(1f, 2f)]
+    [Range(1f, 4f)]
     [SerializeField] private float afterburnerMultiplier = 1.5f;
-    [Range(0f, 1f)]
+    [Range(0f, 2f)]
     [SerializeField] private float idleGravity = 0.3f;
 
     [Header("Visuals")]

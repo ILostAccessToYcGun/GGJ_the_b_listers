@@ -303,11 +303,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 899357897093047063, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
       propertyPath: camDistance
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1025957227756250838, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443448778811593141, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: maxSpeed
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443448778811593141, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: linearDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443448778811593141, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: idleGravity
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443448778811593141, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: afterburnerMultiplier
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 8734832425954972550, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
       propertyPath: m_LocalPosition.x
