@@ -33,17 +33,19 @@ public enum Pose
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Compnents")]
+    [Header("Components")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Rigidbody2D rb;
 
-    [Header("Movement")]
-    [SerializeField] private float moveSpeed = 5f;
+    [Header("Movement Physics")]
+    [SerializeField] private float maxSpeed = 12f;
     [SerializeField] private float engineForce = 3500f;
-    [Range(1f, 2f)]
-    [SerializeField] private float afterburnerMultiplier = 1.5f;
+    [SerializeField] private float linearDrag = 1f;
+
     [Space]
-    [Range(0f, 1f)]
+    [Range(1f, 4f)]
+    [SerializeField] private float afterburnerMultiplier = 1.5f;
+    [Range(0f, 2f)]
     [SerializeField] private float idleGravity = 0.3f;
 
     [Header("Visuals")]
@@ -61,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
         if (spriteRenderer == null) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (rb == null) rb = GetComponent<Rigidbody2D>();
         _cam = Camera.main;
+
+        rb.linearDamping = linearDrag;
     }
 
     public void Runtime(CharacterInput characterInput)
@@ -70,7 +74,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0f;
-
         _lookDirection = (mousePos - transform.position).normalized;
 
         if (_lookDirection.sqrMagnitude > 0.001f)
@@ -79,15 +82,16 @@ public class PlayerMovement : MonoBehaviour
             DecideSprite(angle);
         }
 
+        rb.linearDamping = linearDrag;
+
+        float speedMultiplier = Input.GetKey(KeyCode.LeftShift) ? afterburnerMultiplier : 1f;
+        float currentMaxSpeed = maxSpeed * speedMultiplier;
+
         if (_isThrusting)
         {
-            float speed = Input.GetKey(KeyCode.LeftShift) ? moveSpeed * afterburnerMultiplier : moveSpeed;
-            _state.Velocity = _lookDirection * speed;
-            transform.position += _state.Velocity * Time.deltaTime;
-
             _gravityOn = false;
 
-            rb.linearVelocity = Vector2.zero;
+            rb.AddForce(_lookDirection * engineForce * speedMultiplier * Time.deltaTime);
         }
         else
         {
@@ -95,6 +99,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.gravityScale = _gravityOn ? idleGravity : 0f;
+
+        if (rb.linearVelocity.magnitude > currentMaxSpeed)
+        {
+            rb.linearVelocity = rb.linearVelocity.normalized * currentMaxSpeed;
+        }
     }
 
     void DecideSprite(float signedAngle)
