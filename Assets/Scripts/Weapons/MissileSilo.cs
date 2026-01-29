@@ -6,6 +6,10 @@ public class MissileSilo : WeaponBase
     [SerializeField] float homingStrength;
     [SerializeField] float homingDuration;
     [Range(0f, 15f)][SerializeField] float accuracy; //the angle variation in degrees
+    [SerializeField] float angleChangeThreshhold;
+    [SerializeField] Vector2 angleChangeFrequency;
+    [SerializeField] Vector2 noiseRange;
+    [SerializeField] Vector2 noiseFrequency;
     [SerializeField] GameObject target;
 
 
@@ -25,6 +29,10 @@ public class MissileSilo : WeaponBase
         m.homingStrength = homingStrength;
         m.homingDuration = homingDuration;
         m.angle = Random.Range(-accuracy, accuracy);
+        m.angleChangeThreshhold = angleChangeThreshhold;
+        m.angleChangeFrequency = angleChangeFrequency;
+        m.noiseRange = noiseRange;
+        m.noiseFrequency = noiseFrequency;
         m.target = target;
 
         StartCoroutine(Cooldown());

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing;
 using UnityEngine;
 
 public class Missile : MonoBehaviour
@@ -9,12 +10,18 @@ public class Missile : MonoBehaviour
     public float homingStrength;
     public float homingDuration;
     public float angle;
+    public float angleChangeThreshhold;
+    public Vector2 angleChangeFrequency;
+    public Vector2 noiseRange;
+    public Vector2 noiseFrequency;
 
     float noise = 1.0f;
+    float noiseMult = 1.0f;
 
     public GameObject target;
 
     bool homing = false;
+    bool angling = false;
 
 
     private void Start()
@@ -27,21 +34,22 @@ public class Missile : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(transform.right * speed * Time.deltaTime);
+        transform.Translate(transform.right * speed * Time.deltaTime, Space.World);
         if (homing)
         {
-            //float rotAngle = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(Vector3.forward, (target.transform.position - transform.position).normalized));
-            float rotAngle = Vector3.SignedAngle(transform.right, (target.transform.position - transform.position).normalized, Vector3.forward);
+            if (Vector3.Distance(transform.position, target.transform.position) < 5) noiseMult = 0.1f;
+            else noiseMult = 0.1f;
 
-            Debug.Log(rotAngle);
-            if (rotAngle < 0)
+            Vector3 posVec = ((target.transform.position + ((Vector3)Random.insideUnitCircle * noise * noiseMult)) - transform.position).normalized;
+            float rotAngle = Vector3.SignedAngle(transform.right, posVec, Vector3.forward);
+
+            if (Mathf.Abs(rotAngle) <= angleChangeThreshhold) return;
+            if (!angling)
             {
-                transform.Rotate(Vector3.forward, homingStrength * noise * Time.deltaTime);
+                angling = true;
+                StartCoroutine(AngleChange(rotAngle));
             }
-            else if (rotAngle > 0)
-            {
-                transform.Rotate(Vector3.forward, -homingStrength * noise * Time.deltaTime);
-            }
+            
                 
 
             //Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, (target.transform.position - transform.position).normalized);
@@ -52,6 +60,20 @@ public class Missile : MonoBehaviour
             //    homingStrength * Time.deltaTime
             //);
         }
+    }
+    IEnumerator AngleChange(float rotAngle)
+    {
+        Debug.Log("angling: " + angling);
+        if (rotAngle < 0)
+        {
+            transform.Rotate(Vector3.forward, -homingStrength * noise * Time.deltaTime);
+        }
+        else if (rotAngle > 0)
+        {
+            transform.Rotate(Vector3.forward, homingStrength * noise * Time.deltaTime);
+        }
+        yield return new WaitForSeconds(Random.Range(angleChangeFrequency.x, angleChangeFrequency.y));
+        angling = false;
     }
 
     IEnumerator LifetimeDestroy()
@@ -72,8 +94,8 @@ public class Missile : MonoBehaviour
     {
         do
         {
-            noise = Random.Range(0.8f, 1.2f);
-            yield return new WaitForSeconds(Random.Range(0.3f, 2f));
+            noise = Random.Range(noiseRange.x, noiseRange.y);
+            yield return new WaitForSeconds(Random.Range(noiseFrequency.x, noiseFrequency.y));
         }
         while (homing);
     }
