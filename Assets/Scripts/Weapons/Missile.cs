@@ -8,6 +8,10 @@ public class Missile : MonoBehaviour
     public float lifeTime;
     public float homingStrength;
     public float homingDuration;
+    public float angle;
+
+    float noise = 1.0f;
+
     public GameObject target;
 
     bool homing = false;
@@ -15,22 +19,38 @@ public class Missile : MonoBehaviour
 
     private void Start()
     {
+        transform.Rotate(Vector3.forward, angle);
         StartCoroutine(LifetimeDestroy());
         StartCoroutine(DisableHoming());
+        StartCoroutine(Noise());
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(transform.right * speed * Time.deltaTime);
         if (homing)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, target.transform.position - transform.position);
+            //float rotAngle = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(Vector3.forward, (target.transform.position - transform.position).normalized));
+            float rotAngle = Vector3.SignedAngle(transform.right, (target.transform.position - transform.position).normalized, Vector3.forward);
 
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                targetRotation,
-                homingStrength * Time.deltaTime
-            );
+            Debug.Log(rotAngle);
+            if (rotAngle < 0)
+            {
+                transform.Rotate(Vector3.forward, homingStrength * noise * Time.deltaTime);
+            }
+            else if (rotAngle > 0)
+            {
+                transform.Rotate(Vector3.forward, -homingStrength * noise * Time.deltaTime);
+            }
+                
+
+            //Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, (target.transform.position - transform.position).normalized);
+            //
+            //transform.rotation = Quaternion.RotateTowards(
+            //    transform.rotation,
+            //    targetRotation,
+            //    homingStrength * Time.deltaTime
+            //);
         }
     }
 
@@ -46,6 +66,16 @@ public class Missile : MonoBehaviour
         homing = true;
         yield return new WaitForSeconds(homingDuration);
         homing = false;
+    }
+
+    IEnumerator Noise()
+    {
+        do
+        {
+            noise = Random.Range(0.8f, 1.2f);
+            yield return new WaitForSeconds(Random.Range(0.3f, 2f));
+        }
+        while (homing);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

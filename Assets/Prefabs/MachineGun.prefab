@@ -79,15 +79,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0.1
   reloadTime: 1
-  accuracy: 9.4
   magazineSize: 30
   currentAmmo: 0
   damage: 1
   speed: 75
   lifeTime: 10
-  bullet: {fileID: 4936016829194044349, guid: e811413122e7faf46bd9e8478de7b074, type: 3}
-  aimTarget: {x: 0, y: 0, z: 0}
+  projectile: {fileID: 4936016829194044349, guid: e811413122e7faf46bd9e8478de7b074, type: 3}
   shootingPoint: {fileID: 5634388486109185067}
+  accuracy: 9.4
 --- !u!212 &1815982784245443267
 SpriteRenderer:
   m_ObjectHideFlags: 0

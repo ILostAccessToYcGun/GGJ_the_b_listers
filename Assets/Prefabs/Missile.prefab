@@ -51,6 +51,7 @@ MonoBehaviour:
   lifeTime: 0
   homingStrength: 0
   homingDuration: 0
+  angle: 0
   target: {fileID: 0}
 --- !u!212 &4774625661190421530
 SpriteRenderer:
@@ -59,7 +60,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6202318908165511314}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

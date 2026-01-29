@@ -5,6 +5,7 @@ public class MissileSilo : WeaponBase
     [Header("MissileSilo Stats")]
     [SerializeField] float homingStrength;
     [SerializeField] float homingDuration;
+    [Range(0f, 15f)][SerializeField] float accuracy; //the angle variation in degrees
     [SerializeField] GameObject target;
 
 
@@ -23,6 +24,7 @@ public class MissileSilo : WeaponBase
         m.lifeTime = lifeTime;
         m.homingStrength = homingStrength;
         m.homingDuration = homingDuration;
+        m.angle = Random.Range(-accuracy, accuracy);
         m.target = target;
 
         StartCoroutine(Cooldown());
