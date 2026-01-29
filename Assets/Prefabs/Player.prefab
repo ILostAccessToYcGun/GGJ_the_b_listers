@@ -99,18 +99,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 191980905166623982}
   rb: {fileID: 4787419421217825179}
-  moveSpeed: 35
+  maxSpeed: 35
   engineForce: 3500
-  afterburnerMultiplier: 1.25
-  idleGravity: 0.6
+  linearDrag: 0
+  afterburnerMultiplier: 1.7
+  idleGravity: 1.6
   quadrant1Poses:
     _serializedList:
     - Key: 0
-      Value: {fileID: 8792343726959412212, guid: 1627ee173bc6a0d498b070b859ad7847, type: 3}
+      Value: {fileID: -91920941575826185, guid: a052d1295ddad0044a3a8601a242ba08, type: 3}
     - Key: 1
-      Value: {fileID: 7813679697092408722, guid: 1627ee173bc6a0d498b070b859ad7847, type: 3}
+      Value: {fileID: -72282685759140386, guid: a052d1295ddad0044a3a8601a242ba08, type: 3}
     - Key: 2
-      Value: {fileID: 6492278008286248558, guid: 1627ee173bc6a0d498b070b859ad7847, type: 3}
+      Value: {fileID: 8408485708446853648, guid: a052d1295ddad0044a3a8601a242ba08, type: 3}
+  shootingPose: {fileID: 0}
 --- !u!114 &6625819752002817896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988dd573d761567498ad7f6c7322a4a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camDistance: 5
 --- !u!1 &8206052943949907058
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,12 +311,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 6492278008286248558, guid: 1627ee173bc6a0d498b070b859ad7847, type: 3}
+  m_Sprite: {fileID: 8408485708446853648, guid: a052d1295ddad0044a3a8601a242ba08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 8, y: 8}
+  m_Size: {x: 0.61, y: 0.41}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -363,7 +366,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.241446, g: 0.4214846, b: 0.70440245, a: 0}
+  m_BackGroundColor: {r: 0.23270428, g: 0.23270428, b: 0.23270428, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -388,7 +391,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 32
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

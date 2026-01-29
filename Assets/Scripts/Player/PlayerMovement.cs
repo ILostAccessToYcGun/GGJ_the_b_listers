@@ -4,7 +4,8 @@ using UnityEngine;
 
 public struct CharacterState
 {
-    public bool Charging;
+    public bool Firing;
+    public bool Lancing;
     public Vector3 Velocity;
     public Vector3 Acceleration;
 }
@@ -51,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Visuals")]
     [SerializedDictionary("Cardinal Direction", "Sprite")]
     [SerializeField] public SerializedDictionary<Pose, Sprite> quadrant1Poses;
+    [SerializeField] public Sprite shootingPose;
 
     private CharacterState _state;
     private Vector2 _lookDirection;
@@ -116,8 +118,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (sector >= 8) sector = 0;
 
-        Pose currentPose = (Pose)sector;
-        UpdateRenderer(currentPose);
+        if (!_state.Firing)
+        {
+            Pose currentPose = (Pose)sector;
+            UpdateRenderer(currentPose);
+        }
+        else
+        {
+            spriteRenderer.sprite = shootingPose;
+        }
+        
     }
 
     private void UpdateRenderer(Pose pose)
@@ -128,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
 
         switch (pose)
         {
+            //todo, swap to rotating, not flipping (at least for q4)
             case Pose.North:
                 quadrant1Poses.TryGetValue(Pose.North, out spriteToUse);
                 break;
