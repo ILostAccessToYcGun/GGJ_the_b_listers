@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     //like movement, shooting, vision
 
     [SerializeField] EnemyMovement movement;
+    [SerializeField] WeaponBase weapon;
 
 
     void Start()
@@ -21,7 +22,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        
+        weapon.Fire();
 
         /*
         //Get camera input and update Cam Rotation
