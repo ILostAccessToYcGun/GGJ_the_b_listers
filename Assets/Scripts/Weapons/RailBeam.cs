@@ -1,22 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class RailBeam : MonoBehaviour
 {
     public float damage;
-    public float speed;
     public float lifeTime;
-    public float angle;
+
 
     private void Start()
     {
-        transform.Rotate(Vector3.forward, angle);
         StartCoroutine(LifetimeDestroy());
-    }
-
-    private void Update()
-    {
-        transform.Translate(transform.right * speed * Time.deltaTime, Space.World);
     }
 
     IEnumerator LifetimeDestroy()

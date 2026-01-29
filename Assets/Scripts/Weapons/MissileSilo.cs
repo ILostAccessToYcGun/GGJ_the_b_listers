@@ -3,14 +3,16 @@ using UnityEngine;
 public class MissileSilo : WeaponBase
 {
     [Header("MissileSilo Stats")]
+    [Range(0f, 15f)][SerializeField] float accuracy; //the angle variation in degrees
+    [SerializeField] GameObject target;
+
+    [Header("Missile Stats")]
     [SerializeField] float homingStrength;
     [SerializeField] float homingDuration;
-    [Range(0f, 15f)][SerializeField] float accuracy; //the angle variation in degrees
     [SerializeField] float angleChangeThreshhold;
     [SerializeField] Vector2 angleChangeFrequency;
     [SerializeField] Vector2 noiseRange;
     [SerializeField] Vector2 noiseFrequency;
-    [SerializeField] GameObject target;
 
 
     //basically we are going to shoot one bullet and go on cooldown for a duration

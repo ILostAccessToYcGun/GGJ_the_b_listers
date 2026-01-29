@@ -15,7 +15,7 @@ public class MachineGun : WeaponBase
         if (FireCheck() == 1) return;
 
         currentAmmo--;
-
+        
         Bullet b = Instantiate(projectile, shootingPoint.transform.position, shootingPoint.transform.rotation).GetComponent<Bullet>();
         b.damage = damage;
         b.speed = speed;

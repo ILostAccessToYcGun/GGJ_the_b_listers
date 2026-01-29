@@ -31,7 +31,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3104213532099832029}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6962635976817036743
+--- !u!1 &6799508324269230812
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,61 +39,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3104213532099832029}
-  - component: {fileID: 6162009152024593199}
-  - component: {fileID: 1815982784245443267}
+  - component: {fileID: 769363021028086522}
+  - component: {fileID: 6409265121048563331}
   m_Layer: 0
-  m_Name: MachineGun
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3104213532099832029
+--- !u!4 &769363021028086522
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6962635976817036743}
+  m_GameObject: {fileID: 6799508324269230812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.98, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 2, z: 5}
+  m_LocalPosition: {x: -0.00000009536743, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6193807228624834580}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 3104213532099832029}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6162009152024593199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6962635976817036743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61b0350471d363549b07ddd47101cbf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireRate: 0.1
-  reloadTime: 1
-  magazineSize: 30
-  currentAmmo: 0
-  damage: 1
-  speed: 35
-  lifeTime: 10
-  projectile: {fileID: 4936016829194044349, guid: e811413122e7faf46bd9e8478de7b074, type: 3}
-  shootingPoint: {fileID: 5634388486109185067}
-  accuracy: 9.4
---- !u!212 &1815982784245443267
+--- !u!212 &6409265121048563331
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6962635976817036743}
+  m_GameObject: {fileID: 6799508324269230812}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -142,3 +118,59 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &6962635976817036743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3104213532099832029}
+  - component: {fileID: 6162009152024593199}
+  m_Layer: 0
+  m_Name: MachineGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3104213532099832029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6962635976817036743}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.98, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6193807228624834580}
+  - {fileID: 769363021028086522}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6162009152024593199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6962635976817036743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b0350471d363549b07ddd47101cbf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireRate: 0.1
+  reloadTime: 1
+  magazineSize: 30
+  currentAmmo: 0
+  damage: 1
+  speed: 40
+  lifeTime: 10
+  projectile: {fileID: 4936016829194044349, guid: e811413122e7faf46bd9e8478de7b074, type: 3}
+  shootingPoint: {fileID: 5634388486109185067}
+  accuracy: 9.4
