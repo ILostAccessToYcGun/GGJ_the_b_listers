@@ -105,15 +105,6 @@ MonoBehaviour:
   linearDrag: 0
   afterburnerMultiplier: 1.7
   idleGravity: 1.6
-  quadrant1Poses:
-    _serializedList:
-    - Key: 0
-      Value: {fileID: -91920941575826185, guid: a052d1295ddad0044a3a8601a242ba08, type: 3}
-    - Key: 1
-      Value: {fileID: -72282685759140386, guid: a052d1295ddad0044a3a8601a242ba08, type: 3}
-    - Key: 2
-      Value: {fileID: 8408485708446853648, guid: a052d1295ddad0044a3a8601a242ba08, type: 3}
-  shootingPose: {fileID: 0}
 --- !u!114 &5449425149491088942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1502072382497545598, guid: cc6ec0cb7c54d5d4d8a2d4c9a7af09e4, type: 3}
   shootingPoint: {fileID: 7051663703861880492}
-  timeBetweenShots: 0
+  timeBetweenShots: 0.1
   chargeTimings:
   - 0.8
   - 1.2
@@ -267,7 +258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7757867866208899748}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.51, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

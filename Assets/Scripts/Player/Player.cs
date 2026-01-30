@@ -9,6 +9,17 @@ public struct CharacterState
     public Vector3 Acceleration;
 }
 
+public struct CharacterInput
+{
+    public bool Thrust;
+    public bool AfterBurner;
+    public bool Shoot;
+}
+
+public struct CameraInput
+{
+    public Vector2 Look;
+}
 
 public class Player : MonoBehaviour
 {
@@ -43,38 +54,13 @@ public class Player : MonoBehaviour
         var characterInput = new CharacterInput
         {
             Thrust = input.Thrust.IsPressed(),
+            AfterBurner = input.Sprint.IsPressed(),
+            Shoot = input.Shoot.IsPressed(),
         };
 
         playerMovement.Runtime(characterInput);
         playerCamera.Runtime(playerMovement.gameObject.transform.position);
+        playerWeaponry.Runtime(characterInput);
 
-        /*
-        //Get camera input and update Cam Rotation
-        var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
-        playerCamera.UpdateRotation(cameraInput);
-
-        //Get character input and update it
-        var characterInput = new CharacterInput
-        {
-            Rotation = playerCamera.transform.rotation,
-            Move = input.Move.ReadValue<Vector2>(),
-            Jump = input.Jump.WasPressedThisFrame(),
-            JumpSustain = input.Jump.IsPressed(),
-            Dash = input.Dash.WasPressedThisFrame(),
-            Sprint = input.Sprint.IsPressed()
-        };
-        playerCharacter.UpdateInput(characterInput);
-        playerCharacter.UpdateBody(deltaTime);
-        playerCharacter.BoostVisual(deltaTime);
-
-        var combatInput = new CombatInput
-        {
-            Shoot = input.Attack.IsPressed(),
-            Reload = input.Reload.WasPressedThisFrame()
-        };
-        playerGun.RotateGunTowardsMouse();
-        if (!playerUIToggler.GetUIOpenBool())
-            playerGun.UseWeapon(combatInput);
-         */
     }
 }
