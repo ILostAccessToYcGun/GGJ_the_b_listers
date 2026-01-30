@@ -35,6 +35,7 @@ public class Missile : MonoBehaviour
     private void Update()
     {
         transform.Translate(transform.right * speed * Time.deltaTime, Space.World);
+        if (!target) return;
         if (homing)
         {
             if (Vector3.Distance(transform.position, target.transform.position) < 5) noiseMult = 0.1f;
