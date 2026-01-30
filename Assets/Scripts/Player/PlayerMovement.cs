@@ -2,14 +2,6 @@ using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct CharacterState
-{
-    public bool Firing;
-    public bool Lancing;
-    public Vector3 Velocity;
-    public Vector3 Acceleration;
-}
-
 public struct CharacterInput
 {
     public bool Thrust;

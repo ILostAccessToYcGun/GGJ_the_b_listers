@@ -1,10 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public struct CharacterState
+{
+    public bool Firing;
+    public bool Lancing;
+    public Vector3 Velocity;
+    public Vector3 Acceleration;
+}
+
+
 public class Player : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement;
-    [SerializeField] PlayerLance playerLance;
+    [SerializeField] PlayerWeaponry playerWeaponry;
     [SerializeField] PlayerCamera playerCamera;
 
     private PlayerInput _inputActions;
@@ -15,7 +24,7 @@ public class Player : MonoBehaviour
         _inputActions.Enable();
 
         playerMovement.Init();
-        playerLance.Init();
+        playerWeaponry.Init();
         playerCamera.Init();
     }
 
