@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public GameObject owner;
     public float damage;
     public float speed;
     public float lifeTime;
