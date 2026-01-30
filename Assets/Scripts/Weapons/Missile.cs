@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
+    public GameObject owner;
     public float damage;
     public float speed;
     public float lifeTime;

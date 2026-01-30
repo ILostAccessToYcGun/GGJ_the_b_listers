@@ -42,6 +42,7 @@ public class RailGun : WeaponBase
         RailBeam r = Instantiate(projectile, shootingPoint.transform.position, shootingPoint.transform.rotation).GetComponentInChildren<RailBeam>();
         r.damage = damage;
         r.lifeTime = lifeTime;
+        r.owner = gameObject;
 
         //recoil here
         rb.AddForce(-transform.right * recoil);

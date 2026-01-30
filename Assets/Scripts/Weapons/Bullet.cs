@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public GameObject owner;
     public float damage;
     public float speed;
     public float lifeTime;
@@ -14,7 +15,7 @@ public class Bullet : MonoBehaviour
         StartCoroutine(LifetimeDestroy());
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.Translate(transform.right * speed * Time.deltaTime, Space.World);
     }
