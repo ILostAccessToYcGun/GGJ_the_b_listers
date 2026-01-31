@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 1443448778811593141}
-  playerLance: {fileID: 6625819752002817896}
+  playerWeaponry: {fileID: 5449425149491088942}
   playerCamera: {fileID: 899357897093047063}
 --- !u!1 &3421734361256249103
 GameObject:
@@ -59,7 +59,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4736462217945455886}
   - component: {fileID: 1443448778811593141}
-  - component: {fileID: 6625819752002817896}
+  - component: {fileID: 5449425149491088942}
   - component: {fileID: 4787419421217825179}
   - component: {fileID: 1068566331264442263}
   m_Layer: 6
@@ -78,11 +78,12 @@ Transform:
   m_GameObject: {fileID: 3421734361256249103}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6930315808807145271}
+  - {fileID: 7051663703861880492}
   m_Father: {fileID: 8734832425954972550}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1443448778811593141
@@ -104,16 +105,8 @@ MonoBehaviour:
   linearDrag: 0
   afterburnerMultiplier: 1.7
   idleGravity: 1.6
-  quadrant1Poses:
-    _serializedList:
-    - Key: 0
-      Value: {fileID: -91920941575826185, guid: a052d1295ddad0044a3a8601a242ba08, type: 3}
-    - Key: 1
-      Value: {fileID: -72282685759140386, guid: a052d1295ddad0044a3a8601a242ba08, type: 3}
-    - Key: 2
-      Value: {fileID: 8408485708446853648, guid: a052d1295ddad0044a3a8601a242ba08, type: 3}
-  shootingPose: {fileID: 0}
---- !u!114 &6625819752002817896
+  boostMax: 0
+--- !u!114 &5449425149491088942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,9 +115,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3421734361256249103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b9c553f9298cd84689a266f9ed4b654, type: 3}
+  m_Script: {fileID: 11500000, guid: 5afc7bd013c56a942b4a83126ab53489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1502072382497545598, guid: cc6ec0cb7c54d5d4d8a2d4c9a7af09e4, type: 3}
+  shootingPoint: {fileID: 7051663703861880492}
+  timeBetweenShots: 0.1
+  chargeTimings:
+  - 0.8
+  - 1.2
+  - 1.6
 --- !u!50 &4787419421217825179
 Rigidbody2D:
   serializedVersion: 5
@@ -186,8 +186,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.27}
-  m_Size: {x: 2.52, y: 5.17}
+  m_Offset: {x: 0.010779619, y: -0.1888268}
+  m_Size: {x: 1.81, y: 0.33}
   m_Direction: 0
 --- !u!1 &3699565334271942328
 GameObject:
@@ -234,7 +234,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988dd573d761567498ad7f6c7322a4a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camDistance: 5
+  camDistance: 0
+--- !u!1 &7757867866208899748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7051663703861880492}
+  m_Layer: 6
+  m_Name: ShootingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7051663703861880492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7757867866208899748}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.01, y: 1.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4736462217945455886}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8206052943949907058
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,13 +291,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8206052943949907058}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.11, y: 0.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4736462217945455886}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &191980905166623982
 SpriteRenderer:
   m_ObjectHideFlags: 0

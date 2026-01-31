@@ -21,6 +21,7 @@ public class MachineGun : WeaponBase
         b.speed = speed;
         b.lifeTime = lifeTime;
         b.angle = Random.Range(-accuracy, accuracy);
+        b.owner = gameObject;
 
         StartCoroutine(Cooldown());
     }

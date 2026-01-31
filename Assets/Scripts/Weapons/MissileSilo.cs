@@ -36,6 +36,7 @@ public class MissileSilo : WeaponBase
         m.noiseRange = noiseRange;
         m.noiseFrequency = noiseFrequency;
         m.target = target;
+        m.owner = gameObject;
 
         StartCoroutine(Cooldown());
     }

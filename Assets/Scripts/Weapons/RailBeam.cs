@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class RailBeam : MonoBehaviour
 {
+    public GameObject owner;
     public float damage;
     public float lifeTime;
 
