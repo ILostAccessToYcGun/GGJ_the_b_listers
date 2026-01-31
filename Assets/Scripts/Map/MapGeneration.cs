@@ -90,7 +90,7 @@ public class MapGeneration : MonoBehaviour
                     }
                     else
                     {
-                        UnityEngine.Debug.Log(neighborWallCount);
+                        //UnityEngine.Debug.Log(neighborWallCount);
                         noiseGrid[j, k] = floorTile;
                     }
                 }
