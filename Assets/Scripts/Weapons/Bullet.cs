@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
         StartCoroutine(LifetimeDestroy());
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.Translate(transform.right * speed * Time.deltaTime, Space.World);
     }

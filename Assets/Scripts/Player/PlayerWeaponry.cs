@@ -14,6 +14,8 @@ public class PlayerWeaponry : MonoBehaviour
     [Header("Lance")]
     [SerializeField] private List<float> chargeTimings;
 
+    private float _lanceHoldTime;
+
     private Coroutine _currentFireCoroutine;
 
     public void Init()
