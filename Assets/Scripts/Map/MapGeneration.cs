@@ -11,16 +11,21 @@ public class MapGeneration : MonoBehaviour
     [SerializeField] int mapWidth;
     [SerializeField] int density;
     [SerializeField] int iterations;
+
+    [Space]
+
     [SerializeField] Tilemap wallTilemap;
     [SerializeField] Tilemap floorTilemap;
     [SerializeField] TileBase floorTile;
     [SerializeField] TileBase wallTile;
     [SerializeField] TileBase cloudTile;
     [SerializeField] TileBase seaTile;
+
+    [Space]
+    public GameObject player;
     //[SerializeField] Tilemap mapHolder;
 
     private TileBase[,] noiseGrid;
-    private GameObject creation;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -28,6 +33,7 @@ public class MapGeneration : MonoBehaviour
         noiseGridGeneration();
         cellularAutomation();
         drawMap();
+        randPlayerPos();
     }
 
     // Update is called once per frame
@@ -103,8 +109,8 @@ public class MapGeneration : MonoBehaviour
     void drawMap()
     {
         //Vector2 tileSize = noiseGrid[0, 0].;
-        float yRefection = mapHeight / 2;
-        float xRefection = mapWidth / 2;
+        float yRefection = mapHeight / 2f;
+        float xRefection = mapWidth / 2f;
         for (int x = 1; x < mapWidth; x++)
         {
             for (int y = 1; y < mapHeight; y++)
@@ -122,5 +128,15 @@ public class MapGeneration : MonoBehaviour
                 //creation.name = noiseGrid[x, y].name;
             }
         }
+    }
+
+    void randPlayerPos()
+    {
+        Vector3Int randomTilePos;
+        do
+        {
+            randomTilePos = new Vector3Int(UnityEngine.Random.Range(-mapWidth / 2, mapWidth / 2), UnityEngine.Random.Range(-mapHeight / 2, mapHeight / 2), 0);
+        } while (floorTilemap.GetTile(randomTilePos) == null || wallTilemap.GetTile(randomTilePos));
+        player.transform.position = floorTilemap.CellToWorld(randomTilePos);
     }
 }
