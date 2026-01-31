@@ -19,8 +19,12 @@ public class MenuManager : MonoBehaviour
     }
 
     //load into the first scene once the player presses "Start Game"
-    public void StartButton()
+    public void PlayButton()
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    //Quit button
+    //  If in the editor and its pressed, it will stop running there
+    //  else if its not running in the editor (so like in the actual game) it works as well to end the game and close
 }
