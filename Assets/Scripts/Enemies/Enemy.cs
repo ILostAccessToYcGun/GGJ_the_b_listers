@@ -6,13 +6,14 @@ public class Enemy : MonoBehaviour
     //this will be the main script that runs other components
     //like movement, shooting, vision
 
-    [SerializeField] EnemyMovement movement;
+    public EnemyMovement movement;
     public WeaponBase weapon;
     [SerializeField] EnemyVision vision;
 
     [Header("Status")]
     public bool CanSeePlayer;
     public bool PlayerInRange;
+    public bool PlayerInView;
     public bool IsLowhealth;
     public bool IsReloading;
 

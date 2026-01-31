@@ -1,13 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public enum MoveState { Hit, Run, Search, Flee, LastResort}
+    public MoveState currentState;
+
     Enemy parent;
     public Rigidbody2D rb;
-    private float maxSpeed = 12f;
-    public float lineDamp;
+    PlayerMovement player;
+
+    [Header("Movement Stats")]
+    [SerializeField] float engineForce = 3500f;
+    [SerializeField] float maxSpeed = 24;
+    [SerializeField] float rotateSpeed = 90;
+
     [Header("Noise")]
     [SerializeField] Vector2 noiseFrequency;
     [SerializeField] Vector2 noiseStrength;
@@ -28,6 +37,12 @@ public class EnemyMovement : MonoBehaviour
     [Header("Player Cohesion")]
     [SerializeField] float playerStrength = 25;
 
+    [Header("Run")]
+    [SerializeField] float runTimer = 0.0f;
+    [SerializeField] float runTime = 2.0f;
+    [SerializeField] float fleeTime = 3.0f;
+    [SerializeField] float runDistance = 50f;
+
 
     private void Awake()
     {
@@ -39,7 +54,8 @@ public class EnemyMovement : MonoBehaviour
         parent = _parent;
         EnemyManager.instance.AddEnemy(rb);
         StartCoroutine(RandomizeNoise());
-        lineDamp = rb.linearDamping;
+        player = GameManager.instance.playerMovement;
+        currentState = MoveState.Search;
     }
 
     public void Destroy()
@@ -49,26 +65,17 @@ public class EnemyMovement : MonoBehaviour
 
     public void Runtime()
     {
-        //i think there should be kinda 2 modes, moving and hovering, but for now lets focus on hovering
-
-        //okay so the plan for enemy movement is that we are going to use steering behaviours to manipulate a single velocity vector
-        //because we are using rigidbodies, we'll use the linearVelocity component or more specifically, using rb.addforce
-        
-        //lets think about the logistics behind how they want to move first, lets setup the system for them to:
-        // - stay above sea level * 
-        // - dont touch eachother -> separation
-        // - group up -> cohesian
-
-        //okay so now that we have some basic movement in place, lets start thinking about logic
-        //i think for a basic dumb AI, if we see the player, move towards them and shoot
-        //dont reposition, dont do nothing, just move towards them and shoot
-        //this means we're gonna need some shared variables for vision and states
+        //okay we want the mech to move more like a plane, therefore we are going to have 3 modes:
+        // - hit
+        // - run
+        // - search
 
         //Sea Level
         if (transform.position.y <= EnemyManager.instance.seaLevel.transform.position.y + seaLevelDist)
         {
-            float dist = ((EnemyManager.instance.seaLevel.transform.position.y + seaLevelDist) - transform.position.y) / seaLevelDist;
-            rb.AddForce(dist * noise * seaLevelStrength * Time.deltaTime * transform.up);
+            //float dist = ((EnemyManager.instance.seaLevel.transform.position.y + seaLevelDist) - transform.position.y);
+            //rb.AddForce(dist * noise * seaLevelStrength * Time.deltaTime * transform.up);
+            TurnAwayFromTarget(EnemyManager.instance.seaLevel.gameObject, rotateSpeed * 2);
         }
 
         List<Rigidbody2D> nearby = new List<Rigidbody2D>();
@@ -78,45 +85,81 @@ public class EnemyMovement : MonoBehaviour
             //Separation
             if (Vector3.Distance(transform.position, enemy.transform.position) <= separationDist)
             {
-                rb.AddForce((transform.position - enemy.transform.position).normalized * separationStrength * noise * Time.deltaTime);
-            }
-
-            //Cohesion
-            if (Vector3.Distance(transform.position, enemy.transform.position) <= cohesionDist)
-            {
-                nearby.Add(enemy);
+                //rb.AddForce((transform.position - enemy.transform.position).normalized * separationStrength * noise * Time.deltaTime);
+                TurnAwayFromTarget(enemy.gameObject, rotateSpeed);
             }
         }
 
-        //more Cohesion
-        Vector3 avePos = Vector3.zero;
-        Vector3 totalPos = Vector3.zero;
-        foreach (Rigidbody2D enemy in nearby)
+        switch(currentState)
         {
-            totalPos += enemy.transform.position;
+            case MoveState.Hit:
+                if (parent.CanSeePlayer)
+                {
+                    TurnTowardsTarget(player.gameObject, rotateSpeed);
+
+                    Vector3 posVec = (player.transform.position - transform.position).normalized;
+                    float rotAngle = Vector3.SignedAngle(transform.right, posVec, Vector3.forward);
+
+                    if ((Mathf.Abs(rotAngle) > 45 || Vector3.Distance(transform.position, player.transform.position) <= separationDist) &&
+                        Vector3.Distance(transform.position, player.transform.position) < runDistance)
+                    {
+                        currentState = MoveState.Run;
+                        runTimer = 0.0f;
+                        StartCoroutine(VeerAway());
+                    }
+                }
+                break;
+            case MoveState.Run:
+                {
+                    runTimer += Time.deltaTime;
+                    if (Vector3.Distance(transform.position, player.transform.position) > runDistance)
+                    {
+                        //stop running and attack again
+                        currentState = MoveState.Search;
+                    }
+                    if (runTimer > runTime)
+                    {
+                        currentState = MoveState.Flee;
+                        runTimer = 0.0f;
+                    }
+                }
+                break;
+            case MoveState.Search:
+                if (parent.CanSeePlayer) currentState = MoveState.Hit;
+                break;
+            case MoveState.Flee:
+                runTimer += Time.deltaTime;
+                TurnAwayFromTarget(player.gameObject, rotateSpeed);
+                if (Vector3.Distance(transform.position, player.transform.position) > runDistance)
+                {
+                    //stop running and attack again
+                    currentState = MoveState.Search;
+                }
+                if (runTimer > fleeTime)
+                {
+                    currentState = MoveState.LastResort;
+                }
+                break;
+
+            case MoveState.LastResort:
+                {
+                    TurnTowardsTarget(player.gameObject, rotateSpeed * 3);
+                    if (Vector3.Distance(transform.position, player.transform.position) > runDistance)
+                    {
+                        //stop running and attack again
+                        currentState = MoveState.Search;
+                    }
+                }
+                break;
         }
-        avePos = totalPos / nearby.Count;
-        rb.AddForce((avePos - transform.position).normalized * cohesionStrength * noise * Time.deltaTime);
 
 
-        //if we can see the player, get into range
-        if (parent.CanSeePlayer && !parent.PlayerInRange)
-        {
-            rb.AddForce((GameManager.instance.playerMovement.transform.position - transform.position).normalized * playerStrength * noise * Time.deltaTime);
-            //Vector3 hold = ((transform.position - GameManager.instance.playerMovement.transform.position).normalized * parent.weapon.range) - trans
-            //rb.AddForce( * playerStrength * noise * Time.deltaTime);
-        }
-
-        if (parent.PlayerInRange) rb.linearDamping = lineDamp * 4;
-        else rb.linearDamping = lineDamp;
-
-
+        
+        if (currentState != MoveState.LastResort)
+            rb.AddForce(transform.right * noise * engineForce * Time.deltaTime);
 
         //Max Speed Clamping
-        if (rb.linearVelocity.magnitude > maxSpeed)
-        {
-            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
-        }
+        if (rb.linearVelocity.magnitude > maxSpeed) rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
     }
 
     IEnumerator RandomizeNoise()
@@ -127,5 +170,45 @@ public class EnemyMovement : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(noiseFrequency.x, noiseFrequency.y));
         }
         yield return null;
+    }
+
+    //returns true once we're mostly aiming towards the player
+    public bool TurnTowardsTarget(GameObject target, float turnStrength)
+    {
+        Vector3 posVec = (target.transform.position - transform.position).normalized;
+        float rotAngle = Vector3.SignedAngle(transform.right, posVec, Vector3.forward);
+
+        if (rotAngle < 0)
+            transform.Rotate(Vector3.forward, -turnStrength * Time.deltaTime);
+
+        else if (rotAngle > 0)
+            transform.Rotate(Vector3.forward, turnStrength * Time.deltaTime);
+
+        if (Mathf.Abs(rotAngle) < 1) return true;
+        else return false;
+    }
+
+    public bool TurnAwayFromTarget(GameObject target, float turnStrength)
+    {
+        Vector3 posVec = (target.transform.position - transform.position).normalized;
+        float rotAngle = Vector3.SignedAngle(transform.right, posVec, Vector3.forward);
+
+        if (rotAngle < 0)
+            transform.Rotate(Vector3.forward, turnStrength * Time.deltaTime);
+
+        else if (rotAngle > 0)
+            transform.Rotate(Vector3.forward, -turnStrength * Time.deltaTime);
+
+        if (Mathf.Abs(rotAngle) < 179) return true;
+        else return false;
+    }
+
+    IEnumerator VeerAway()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            TurnAwayFromTarget(player.gameObject, rotateSpeed);
+            yield return null;
+        }
     }
 }

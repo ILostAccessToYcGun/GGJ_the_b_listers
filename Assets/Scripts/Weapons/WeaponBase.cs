@@ -9,7 +9,6 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] float fireRate; //delay between shots;
     [SerializeField] float reloadTime; //time to reload
     public float range;
-    [SerializeField] float rotateSpeed;
     [SerializeField] int magazineSize;
     [SerializeField] protected int currentAmmo;
     bool reloading;
@@ -62,21 +61,5 @@ public class WeaponBase : MonoBehaviour
         cooldown = true;
         yield return new WaitForSeconds(fireRate);
         cooldown = false;
-    }
-
-    //returns true once we're mostly aiming towards the player
-    public bool TurnTowardsTarget(GameObject target)
-    {
-        Vector3 posVec = (target.transform.position - transform.position).normalized;
-        float rotAngle = Vector3.SignedAngle(transform.right, posVec, Vector3.forward);
-
-        if (rotAngle < 0)
-            transform.Rotate(Vector3.forward, -rotateSpeed * Time.deltaTime);
-
-        else if (rotAngle > 0)
-            transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime);
-
-        if (Mathf.Abs(rotAngle) < 10) return true;
-        else return false;
     }
 }
