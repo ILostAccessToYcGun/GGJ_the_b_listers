@@ -10,13 +10,16 @@ public class MapGeneration : MonoBehaviour
     [SerializeField] int mapWidth;
     [SerializeField] int density;
     [SerializeField] int iterations;
-    [SerializeField] Sprite floorTile;
-    [SerializeField] Sprite wallTile;
+    [SerializeField] GameObject floorTile;
+    [SerializeField] GameObject wallTile;
+    [SerializeField] GameObject cloudTile;
+    [SerializeField] GameObject seaTile;
 
-    private Sprite[,] noiseGrid;
+    private GameObject[,] noiseGrid;
+    private GameObject creation;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         noiseGridGeneration();
         cellularAutomation();
@@ -31,12 +34,12 @@ public class MapGeneration : MonoBehaviour
 
     void noiseGridGeneration()
     {
-        noiseGrid = new Sprite[mapHeight, mapWidth];
-        int random = UnityEngine.Random.Range(1, 100);
+        noiseGrid = new GameObject[mapHeight, mapWidth];
         for (int i = 0; i < mapHeight; i++)
         {
             for (int j = 0; j < mapWidth; j++)
             {
+                int random = UnityEngine.Random.Range(1, 100);
                 if (random > density)
                 {
                     noiseGrid[i, j] = floorTile;
@@ -49,42 +52,44 @@ public class MapGeneration : MonoBehaviour
         }
     }
 
-    void cellularAutomation()
+    void cellularAutomation()// ciling will be clouds that can be passed, bottom will be sea (inta death), sides will be infite by have warning(no need for me to do warning)
     {
         for (int i = 1; i < iterations; i++)
         {
-            Sprite[,] tempNoiseGrid = noiseGrid;
-            for (int j = 0; j < mapHeight; j++)
+            GameObject[,] tempNoiseGrid = noiseGrid;
+            for (int j = 1; j < mapHeight - 1; j++)
             {
-                for (int k = 0; k < mapWidth; k++)
+                for (int k = 1; k < mapWidth - 1; k++)
                 {
                     int neighborWallCount = 0;
-                    for (int y = j - 1; y < j + 1; y++)
+                    bool border = false;
+                    for (int y = j - 1; y < j + 2; y++)
                     {
-                        for (int x = k - 1; x < k + 1; x++)
+                        for (int x = k - 1; x < k + 2; x++)
                         {
-                            if (y >= 1 && x >= 1 && y <= mapHeight && x <= mapWidth)
+                            if (y >= 0 && x >= 0 && y <= mapHeight && x <= mapWidth)//later (y >= 0 && x >= 1 && y <= mapHeight && x <= mapWidth - 2)
                             {
                                 if (y != j && x != k)
                                 {
-                                    if (tempNoiseGrid[y, x] == wallTile)
+                                    if (noiseGrid[y, x] == wallTile)
                                     {
-                                        neighborWallCount++;
+                                        neighborWallCount += 1;
                                     }
                                 }
                             }
                             else
                             {
-                                neighborWallCount++;//may be obsolete
+                                border = true;
                             }
                         }
                     }
-                    if (neighborWallCount > 4)
+                    if (neighborWallCount >= 4 || border)
                     {
                         noiseGrid[j, k] = wallTile;
                     }
                     else
                     {
+                        UnityEngine.Debug.Log(neighborWallCount);
                         noiseGrid[j, k] = floorTile;
                     }
                 }
@@ -98,7 +103,8 @@ public class MapGeneration : MonoBehaviour
         {
             for (int y = 1; y < mapWidth; y++)
             {
-                noiseGrid.
+                creation = Instantiate(noiseGrid[x, y], new Vector2(x, y), Quaternion.identity);
+                creation.name = noiseGrid[x, y].name;
             }
         }
     }
