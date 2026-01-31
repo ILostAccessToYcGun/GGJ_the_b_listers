@@ -11,13 +11,15 @@ public class MapGeneration : MonoBehaviour
     [SerializeField] int mapWidth;
     [SerializeField] int density;
     [SerializeField] int iterations;
-    [SerializeField] GameObject floorTile;
-    [SerializeField] GameObject wallTile;
-    [SerializeField] GameObject cloudTile;
-    [SerializeField] GameObject seaTile;
-    [SerializeField] GameObject mapHolder;
+    [SerializeField] Tilemap wallTilemap;
+    [SerializeField] Tilemap floorTilemap;
+    [SerializeField] TileBase floorTile;
+    [SerializeField] TileBase wallTile;
+    [SerializeField] TileBase cloudTile;
+    [SerializeField] TileBase seaTile;
+    //[SerializeField] Tilemap mapHolder;
 
-    private GameObject[,] noiseGrid;
+    private TileBase[,] noiseGrid;
     private GameObject creation;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,7 +38,7 @@ public class MapGeneration : MonoBehaviour
 
     void noiseGridGeneration()
     {
-        noiseGrid = new GameObject[mapHeight, mapWidth];
+        noiseGrid = new TileBase[mapHeight, mapWidth];
         for (int i = 0; i < mapHeight; i++)
         {
             for (int j = 0; j < mapWidth; j++)
@@ -58,7 +60,7 @@ public class MapGeneration : MonoBehaviour
     {
         for (int i = 1; i < iterations; i++)
         {
-            GameObject[,] tempNoiseGrid = (GameObject[,])noiseGrid.Clone();
+            TileBase[,] tempNoiseGrid = (TileBase[,])noiseGrid.Clone();
             for (int j = 1; j < mapHeight; j++)
             {
                 for (int k = 1; k < mapWidth; k++)
@@ -100,14 +102,24 @@ public class MapGeneration : MonoBehaviour
 
     void drawMap()
     {
-        Vector2 tileSize = noiseGrid[0, 0].GetComponent<SpriteRenderer>().bounds.size;
-        for (int x = 1; x < mapHeight; x++)
+        //Vector2 tileSize = noiseGrid[0, 0].;
+        float yRefection = mapHeight / 2;
+        float xRefection = mapWidth / 2;
+        for (int x = 1; x < mapWidth; x++)
         {
-            for (int y = 1; y < mapWidth; y++)
+            for (int y = 1; y < mapHeight; y++)
             {
-                creation = Instantiate(noiseGrid[x, y], new Vector2(x * tileSize.x, y * tileSize.y), Quaternion.identity);
-                creation.transform.parent = mapHolder.transform;
-                creation.name = noiseGrid[x, y].name;
+                if (noiseGrid[x, y] == wallTile)
+                {
+                    wallTilemap.SetTile(new Vector3Int((int)(x - xRefection), (int)(y - yRefection), 0), noiseGrid[x, y]);
+                }
+                else
+                {
+                    floorTilemap.SetTile(new Vector3Int((int)(x - xRefection), (int)(y - yRefection), 0), noiseGrid[x, y]);
+                }
+                //creation = Instantiate(noiseGrid[x, y], new Vector2(x * tileSize.x - xRefection, y * tileSize.y - yRefection), Quaternion.identity);
+                //creation.transform.parent = mapHolder.transform;
+                //creation.name = noiseGrid[x, y].name;
             }
         }
     }
