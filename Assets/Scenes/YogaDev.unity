@@ -668,10 +668,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1763532622115195073, guid: a9f49d03ff4b48b4c9bb8e9d3894dcab, type: 3}
-      propertyPath: acceleration
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 3777827502101873799, guid: a9f49d03ff4b48b4c9bb8e9d3894dcab, type: 3}
       propertyPath: m_Name
       value: YellowEnemy

@@ -49,8 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e74ffcdb76d2644b909940fd020c579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   rb: {fileID: 0}
-  lineDamp: 0
+  engineForce: 3500
+  maxSpeed: 24
+  rotateSpeed: 120
   noiseFrequency: {x: 5, y: 10}
   noiseStrength: {x: 0.5, y: 3}
   noise: 1
@@ -61,6 +64,10 @@ MonoBehaviour:
   cohesionDist: 40
   cohesionStrength: 100
   playerStrength: 300
+  runTimer: 0
+  runTime: 2
+  fleeTime: 3
+  runDistance: 50
 --- !u!50 &5284298586502015847
 Rigidbody2D:
   serializedVersion: 5
@@ -175,6 +182,7 @@ MonoBehaviour:
   vision: {fileID: 1898268875233808486}
   CanSeePlayer: 0
   PlayerInRange: 0
+  PlayerInView: 0
   IsLowhealth: 0
   IsReloading: 0
 --- !u!1 &4150358369089872445
@@ -254,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 100
+  viewConeAngle: 45
   reactionTime: {x: 0.3, y: 0.5}
   lineOfSightMask:
     serializedVersion: 2
