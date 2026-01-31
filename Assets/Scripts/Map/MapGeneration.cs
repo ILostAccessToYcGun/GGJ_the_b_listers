@@ -14,6 +14,7 @@ public class MapGeneration : MonoBehaviour
     [SerializeField] GameObject wallTile;
     [SerializeField] GameObject cloudTile;
     [SerializeField] GameObject seaTile;
+    [SerializeField] GameObject mapHolder;
 
     private GameObject[,] noiseGrid;
     private GameObject creation;
@@ -56,22 +57,21 @@ public class MapGeneration : MonoBehaviour
     {
         for (int i = 1; i < iterations; i++)
         {
-            GameObject[,] tempNoiseGrid = noiseGrid;
-            for (int j = 1; j < mapHeight - 1; j++)
+            GameObject[,] tempNoiseGrid = (GameObject[,])noiseGrid.Clone();
+            for (int j = 1; j < mapHeight; j++)
             {
-                for (int k = 1; k < mapWidth - 1; k++)
+                for (int k = 1; k < mapWidth; k++)
                 {
                     int neighborWallCount = 0;
-                    bool border = false;
-                    for (int y = j - 1; y < j + 2; y++)
+                    for (int y = j - 1; y <= j + 1; y++)
                     {
-                        for (int x = k - 1; x < k + 2; x++)
+                        for (int x = k - 1; x <= k + 1; x++)
                         {
-                            if (y >= 0 && x >= 0 && y <= mapHeight && x <= mapWidth)//later (y >= 0 && x >= 1 && y <= mapHeight && x <= mapWidth - 2)
+                            if (y >= 0 && x >= 0 && y < mapHeight && x < mapWidth)//later (y >= 0 && x >= 1 && y <= mapHeight && x <= mapWidth - 2)
                             {
-                                if (y != j && x != k)
+                                if (y != j || x != k)
                                 {
-                                    if (noiseGrid[y, x] == wallTile)
+                                    if (tempNoiseGrid[y, x] == wallTile)
                                     {
                                         neighborWallCount += 1;
                                     }
@@ -79,11 +79,11 @@ public class MapGeneration : MonoBehaviour
                             }
                             else
                             {
-                                border = true;
+                                neighborWallCount += 1;
                             }
                         }
                     }
-                    if (neighborWallCount >= 4 || border)
+                    if (neighborWallCount > 4)
                     {
                         noiseGrid[j, k] = wallTile;
                     }
@@ -104,6 +104,7 @@ public class MapGeneration : MonoBehaviour
             for (int y = 1; y < mapWidth; y++)
             {
                 creation = Instantiate(noiseGrid[x, y], new Vector2(x, y), Quaternion.identity);
+                creation.transform.parent = mapHolder.transform;
                 creation.name = noiseGrid[x, y].name;
             }
         }
