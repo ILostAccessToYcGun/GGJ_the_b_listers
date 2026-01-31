@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;  //used for loading/unloading scenes
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
     }
 
-    // Update is called once per frame
-    void Update()
+   void Update()
     {
-
     }
 
     //load into the first scene once the player presses "Start Game"
