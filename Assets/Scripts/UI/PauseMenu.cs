@@ -41,6 +41,7 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         Debug.Log("Loading menu...");
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MaruDev");  //Change this to whatever is the main menu scene
     }
 
