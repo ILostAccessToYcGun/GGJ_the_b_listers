@@ -14,6 +14,7 @@ public struct CharacterInput
     public bool Thrust;
     public bool AfterBurner;
     public bool Shoot;
+    public bool Lance;
 }
 
 public struct CameraInput
@@ -56,6 +57,7 @@ public class Player : MonoBehaviour
             Thrust = input.Thrust.IsPressed(),
             AfterBurner = input.Sprint.IsPressed(),
             Shoot = input.Shoot.IsPressed(),
+            Lance = input.Lance.IsPressed(),
         };
 
         playerMovement.Runtime(characterInput);
