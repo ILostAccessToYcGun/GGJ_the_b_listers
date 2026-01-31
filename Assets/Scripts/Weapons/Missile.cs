@@ -65,7 +65,6 @@ public class Missile : MonoBehaviour
     }
     IEnumerator AngleChange(float rotAngle)
     {
-        Debug.Log("angling: " + angling);
         if (rotAngle < 0)
         {
             transform.Rotate(Vector3.forward, -homingStrength * noise * Time.deltaTime);

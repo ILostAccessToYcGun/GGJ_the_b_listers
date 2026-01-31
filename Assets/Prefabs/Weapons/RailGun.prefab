@@ -112,6 +112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0
   reloadTime: 8
+  range: 90
+  rotateSpeed: 20
   magazineSize: 1
   currentAmmo: 0
   damage: 5
