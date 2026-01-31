@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d8cdcd06028ef40b9afb3220f96ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   damage: 1
-  speed: 80
+  speed: 100
   lifeTime: 1.6
   angle: 0
