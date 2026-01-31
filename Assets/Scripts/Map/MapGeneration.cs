@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -99,11 +100,12 @@ public class MapGeneration : MonoBehaviour
 
     void drawMap()
     {
+        Vector2 tileSize = noiseGrid[0, 0].GetComponent<SpriteRenderer>().bounds.size;
         for (int x = 1; x < mapHeight; x++)
         {
             for (int y = 1; y < mapWidth; y++)
             {
-                creation = Instantiate(noiseGrid[x, y], new Vector2(x, y), Quaternion.identity);
+                creation = Instantiate(noiseGrid[x, y], new Vector2(x * tileSize.x, y * tileSize.y), Quaternion.identity);
                 creation.transform.parent = mapHolder.transform;
                 creation.name = noiseGrid[x, y].name;
             }
