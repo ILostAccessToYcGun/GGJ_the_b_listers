@@ -78,7 +78,7 @@ Transform:
   m_GameObject: {fileID: 3421734361256249103}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -105,6 +105,7 @@ MonoBehaviour:
   linearDrag: 0
   afterburnerMultiplier: 1.7
   idleGravity: 1.6
+  boostMax: 0
 --- !u!114 &5449425149491088942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,8 +186,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.49488676, y: 0.008001208}
-  m_Size: {x: 1.5302265, y: 2.6897442}
+  m_Offset: {x: 0.010779619, y: -0.1888268}
+  m_Size: {x: 1.81, y: 0.33}
   m_Direction: 0
 --- !u!1 &3699565334271942328
 GameObject:
@@ -233,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988dd573d761567498ad7f6c7322a4a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camDistance: 5
+  camDistance: 0
 --- !u!1 &7757867866208899748
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +247,7 @@ GameObject:
   m_Layer: 6
   m_Name: ShootingPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -259,7 +260,7 @@ Transform:
   m_GameObject: {fileID: 7757867866208899748}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.51, y: 0, z: 0}
+  m_LocalPosition: {x: 0.01, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -290,13 +291,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8206052943949907058}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.11, y: 0.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4736462217945455886}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &191980905166623982
 SpriteRenderer:
   m_ObjectHideFlags: 0

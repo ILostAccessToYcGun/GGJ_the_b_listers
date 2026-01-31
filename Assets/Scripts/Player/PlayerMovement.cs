@@ -18,6 +18,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float afterburnerMultiplier = 1.5f;
     [Range(0f, 2f)]
     [SerializeField] private float idleGravity = 0.3f;
+    [Space]
+    [SerializeField] private float boostMax;
+
+    private float boostAmount;
 
     private Vector2 _lookDirection;
     private bool _isThrusting;
@@ -31,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
         _cam = Camera.main;
 
         rb.linearDamping = linearDrag;
+
+        boostAmount = boostMax;
     }
 
     public void Runtime(CharacterInput characterInput)

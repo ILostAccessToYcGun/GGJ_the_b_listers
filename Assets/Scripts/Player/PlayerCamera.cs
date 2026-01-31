@@ -22,7 +22,8 @@ public class PlayerCamera : MonoBehaviour
 
         var final_position = playerPosition + clamped_direction;
 
-        midpoint = (playerPosition + final_position) / 2.0f;
+        //midpoint = (playerPosition + final_position) / 2.0f;
+        midpoint = playerPosition;
 
         transform.position = new Vector3(midpoint.x, midpoint.y, transform.position.z);
     }
