@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerCamera playerCamera;
 
     private PlayerInput _inputActions;
+    [SerializeField] private Rigidbody2D _rb;
 
     void Start()
     {
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour
         _inputActions.Enable();
 
         playerMovement.Init();
-        playerWeaponry.Init();
+        playerWeaponry.Init(_rb);
         playerCamera.Init();
     }
 

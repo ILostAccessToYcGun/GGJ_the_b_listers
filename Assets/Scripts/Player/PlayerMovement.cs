@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maxSpeed = 12f;
     [SerializeField] private float engineForce = 3500f;
     [SerializeField] private float linearDrag = 1f;
+    [SerializeField] private float chargingDrag = 4f; 
 
     [Space]
     [Range(1f, 4f)]
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 _lookDirection;
     private bool _isThrusting;
+    private bool _isCharging; 
     private bool _gravityOn;
     private Camera _cam;
 
@@ -42,10 +44,13 @@ public class PlayerMovement : MonoBehaviour
     public void Runtime(CharacterInput characterInput)
     {
         if (_cam == null) _cam = Camera.main;
-        _isThrusting = characterInput.Thrust;
+
+        _isCharging = characterInput.Lance;
+
+        _isThrusting = characterInput.Thrust && !_isCharging;
 
         Vector3 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0f; 
+        mousePos.z = 0f;
         _lookDirection = (mousePos - transform.position).normalized;
 
         if (_lookDirection != Vector2.zero)
@@ -53,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
             transform.up = _lookDirection;
         }
 
-        rb.linearDamping = linearDrag;
+        rb.linearDamping = _isCharging ? chargingDrag : linearDrag;
 
         float speedMultiplier = characterInput.AfterBurner ? afterburnerMultiplier : 1f;
         float currentMaxSpeed = maxSpeed * speedMultiplier;
@@ -69,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.gravityScale = _gravityOn ? idleGravity : 0f;
+
 
         if (rb.linearVelocity.magnitude > currentMaxSpeed)
         {

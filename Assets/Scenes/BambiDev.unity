@@ -305,6 +305,106 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1746520046498326077, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: _rb
+      value: 
+      objectReference: {fileID: 4999530513991488406}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashForces.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashDistances.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: 'dashForces.Array.data[0]'
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: 'dashForces.Array.data[1]'
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: 'dashForces.Array.data[2]'
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: 'chargeTimings.Array.data[0]'
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: 'chargeTimings.Array.data[1]'
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: 'chargeTimings.Array.data[2]'
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: 'dashDistances.Array.data[0]'
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: 'dashDistances.Array.data[1]'
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: 'dashDistances.Array.data[2]'
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.data[1].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.data[0].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449425149491088942, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+      propertyPath: dashCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8734832425954972550, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -350,6 +450,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+--- !u!50 &4999530513991488406 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 4787419421217825179, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
+  m_PrefabInstance: {fileID: 4999530513991488405}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
