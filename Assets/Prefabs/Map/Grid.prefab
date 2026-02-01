@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 128.2, y: 128.2, z: 128.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8726858124240092869}
@@ -103,9 +103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c99d1ee4fed7d14da02f889847f4789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapHeight: 200
-  mapWidth: 200
-  density: 60
+  mapHeight: 500
+  mapWidth: 500
+  density: 55
   iterations: 10
   wallTilemap: {fileID: 3483585443068105348}
   floorTilemap: {fileID: 2910086699175230295}
@@ -113,6 +113,7 @@ MonoBehaviour:
   wallTile: {fileID: 11400000, guid: d9f5beb6a1596a24a898a340a05c43c5, type: 2}
   cloudTile: {fileID: 0}
   seaTile: {fileID: 0}
+  player: {fileID: 0}
 --- !u!156049354 &7127889667845859773
 Grid:
   m_ObjectHideFlags: 0
@@ -122,7 +123,7 @@ Grid:
   m_GameObject: {fileID: 4368116431523597325}
   m_Enabled: 1
   m_CellSize: {x: 1, y: 1, z: 1}
-  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellGap: {x: -0.75, y: -0.75, z: -0.75}
   m_CellLayout: 0
   m_CellSwizzle: 0
 --- !u!1 &6357269871196399400
@@ -154,7 +155,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 956661755874089430}
@@ -315,7 +316,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 956661755874089430}
