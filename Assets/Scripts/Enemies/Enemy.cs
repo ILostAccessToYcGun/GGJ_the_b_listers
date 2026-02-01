@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     public bool PlayerInRange;
     public bool PlayerInView;
     public bool IsLowhealth;
-    public bool IsReloading;
+    //public bool IsReloading;
 
 
     void Start()

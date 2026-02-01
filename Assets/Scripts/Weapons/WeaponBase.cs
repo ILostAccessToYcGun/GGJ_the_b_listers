@@ -10,8 +10,8 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] float reloadTime; //time to reload
     public float range;
     [SerializeField] int magazineSize;
-    [SerializeField] protected int currentAmmo;
-    bool reloading;
+    [SerializeField] public int currentAmmo;
+    public bool reloading;
     bool cooldown;
 
     [Header("Projectile Stats")]
@@ -48,7 +48,7 @@ public class WeaponBase : MonoBehaviour
         return 0;
     }
 
-    protected IEnumerator Reload()
+    public IEnumerator Reload()
     {
         reloading = true;
         yield return new WaitForSeconds(reloadTime);

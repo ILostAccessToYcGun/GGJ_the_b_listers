@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9022621750723642833}
-  - component: {fileID: 1763532622115195073}
+  - component: {fileID: 4487644495259151029}
   - component: {fileID: 5284298586502015847}
   - component: {fileID: 8483094835021604088}
   m_Layer: 7
@@ -37,7 +37,7 @@ Transform:
   - {fileID: 4562682099749520824}
   m_Father: {fileID: 391176069538905798}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1763532622115195073
+--- !u!114 &4487644495259151029
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,24 +46,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1051476722075885147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e74ffcdb76d2644b909940fd020c579, type: 3}
+  m_Script: {fileID: 11500000, guid: bfba7ff8b4e39614780bed920eeb1baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
+  currentState: 2
   rb: {fileID: 0}
   engineForce: 3500
   maxSpeed: 24
   rotateSpeed: 120
+  engine: 1
   noiseFrequency: {x: 5, y: 10}
   noiseStrength: {x: 0.5, y: 3}
   noise: 1
   seaLevelDist: 55
   seaLevelStrength: 1000
   separationDist: 15
-  separationStrength: 200
-  cohesionDist: 40
-  cohesionStrength: 100
-  playerStrength: 300
   runTimer: 0
   runTime: 2
   fleeTime: 3
@@ -177,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce23a3ff97665564d88249d7293b103f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 1763532622115195073}
+  movement: {fileID: 0}
   weapon: {fileID: 3603696389021468507}
   vision: {fileID: 1898268875233808486}
   CanSeePlayer: 0
@@ -262,11 +259,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 100
+  reactionRange: 25
   viewConeAngle: 45
   reactionTime: {x: 0.3, y: 0.5}
-  lineOfSightMask:
+  playerMask:
     serializedVersion: 2
     m_Bits: 833
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &8652962812782294435
 GameObject:
   m_ObjectHideFlags: 0
