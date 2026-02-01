@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0.1
   reloadTime: 1
+  range: 25
   magazineSize: 30
   currentAmmo: 0
   damage: 1
@@ -173,4 +174,4 @@ MonoBehaviour:
   lifeTime: 10
   projectile: {fileID: 4936016829194044349, guid: e811413122e7faf46bd9e8478de7b074, type: 3}
   shootingPoint: {fileID: 5634388486109185067}
-  accuracy: 9.4
+  accuracy: 12

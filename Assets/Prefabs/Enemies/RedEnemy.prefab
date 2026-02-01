@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &350117548954877582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 465886092327139080}
+  - component: {fileID: 7243377502130591462}
+  m_Layer: 8
+  m_Name: Vision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &465886092327139080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350117548954877582}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1083493264356944495}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7243377502130591462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350117548954877582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f839fdba3d9cdb3428ce7cda1acc256f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 100
+  reactionTime: {x: 0.3, y: 0.5}
+  lineOfSightMask:
+    serializedVersion: 2
+    m_Bits: 705
 --- !u!1 &1380683824758399850
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,13 +59,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8202737114736852530}
   - component: {fileID: 9176897607578111538}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RedEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8202737114736852530
 Transform:
   m_ObjectHideFlags: 0
@@ -47,6 +96,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 8222395205099426477}
   weapon: {fileID: 2638190365094615606}
+  vision: {fileID: 7243377502130591462}
+  CanSeePlayer: 0
+  PlayerInRange: 0
+  IsLowhealth: 0
+  IsReloading: 0
 --- !u!1 &7572568934590051501
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +113,7 @@ GameObject:
   - component: {fileID: 8222395205099426477}
   - component: {fileID: 4549894369790060555}
   - component: {fileID: 23442004087399485}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,6 +135,7 @@ Transform:
   m_Children:
   - {fileID: 6565877968822200939}
   - {fileID: 1998035282208945569}
+  - {fileID: 465886092327139080}
   m_Father: {fileID: 8202737114736852530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8222395205099426477
@@ -96,6 +151,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  lineDamp: 0
+  noiseFrequency: {x: 5, y: 10}
+  noiseStrength: {x: 0.5, y: 3}
+  noise: 1
+  seaLevelDist: 55
+  seaLevelStrength: 1000
+  separationDist: 15
+  separationStrength: 200
+  cohesionDist: 40
+  cohesionStrength: 100
+  playerStrength: 100
 --- !u!50 &4549894369790060555
 Rigidbody2D:
   serializedVersion: 5
@@ -109,9 +175,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0.5
+  m_LinearDamping: 0.2
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1.6
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -122,7 +188,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &23442004087399485
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -170,7 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6565877968822200939}
   - component: {fileID: 4016049091068875757}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1998035282208945569}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,6 +356,14 @@ PrefabInstance:
     - target: {fileID: 3925450340654267708, guid: 2c0ce629d7c723145ba233334a1c9c0b, type: 3}
       propertyPath: m_Name
       value: MissileSilo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925450340654267708, guid: 2c0ce629d7c723145ba233334a1c9c0b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912725434636048832, guid: 2c0ce629d7c723145ba233334a1c9c0b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7170712610959850429, guid: 2c0ce629d7c723145ba233334a1c9c0b, type: 3}
       propertyPath: m_LocalScale.x
@@ -362,6 +436,10 @@ PrefabInstance:
     - target: {fileID: 7866105978753570473, guid: 2c0ce629d7c723145ba233334a1c9c0b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038372813463545278, guid: 2c0ce629d7c723145ba233334a1c9c0b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

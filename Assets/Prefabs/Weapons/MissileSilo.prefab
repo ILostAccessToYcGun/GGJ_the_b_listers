@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0.025
   reloadTime: 10
+  range: 40
   magazineSize: 50
   currentAmmo: 0
   damage: 2
@@ -55,14 +56,14 @@ MonoBehaviour:
   lifeTime: 10
   projectile: {fileID: 6202318908165511314, guid: 702edc9878da7dc4ca8b159aade77294, type: 3}
   shootingPoint: {fileID: 4912725434636048832}
+  accuracy: 5
+  target: {fileID: 0}
   homingStrength: 7500
   homingDuration: 30
-  accuracy: 5
   angleChangeThreshhold: 30
   angleChangeFrequency: {x: 0.1, y: 0.5}
   noiseRange: {x: 0.3, y: 3}
   noiseFrequency: {x: 0.3, y: 2}
-  target: {fileID: 0}
 --- !u!1 &4912725434636048832
 GameObject:
   m_ObjectHideFlags: 0
