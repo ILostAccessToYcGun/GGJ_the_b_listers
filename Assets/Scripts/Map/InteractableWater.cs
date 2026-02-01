@@ -2,12 +2,27 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
+using System.Collections.Generic;
 
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(EdgeCollider2D))]
 [RequireComponent(typeof(WaterTriggerHandler))]
 public class InteractableWater : MonoBehaviour
 {
+    [Header("Springs")]
+    [SerializeField] private float springConstant = 1.4f;
+    [SerializeField] private float damping = 1.1f;
+    [SerializeField] private float spread = 6.5f;
+    [SerializeField, Range(1, 10)] private int wavePropogationIterations = 8;
+    [SerializeField, Range(0f, 20f)] private float speedMult = 5.5f;
+
+    [Header("Force")]
+    public float forceMultiplier = 0.2f;
+    [Range(1f, 50f)] public float maxForce = 5f;
+
+    [Header("Collision")]
+    [SerializeField, Range(1f, 10f)] private float playerCollisionRadiusMult = 4.15f;
+
     [Header("Mesh Generation")]
     [Range(2, 500)] public int numOfXVertices = 70;
     public float width = 10f;
@@ -26,15 +41,77 @@ public class InteractableWater : MonoBehaviour
 
     private EdgeCollider2D edgeCollider;
 
+    private class WaterPoint
+    {
+        public float velocity, pos, targetHeight;
+    }
+    private List<WaterPoint> waterPoints = new List<WaterPoint>();
+
     private void Start()
     {
+        edgeCollider = GetComponent<EdgeCollider2D>();
+
         GenerateMesh();
+        CreateWaterPoints();
     }
 
     private void Reset()
     {
         edgeCollider = GetComponent<EdgeCollider2D>();
         edgeCollider.isTrigger = true;
+    }
+
+    private void FixedUpdate()
+    {
+        //updating all the spring positions
+        for (int i = 1; i < waterPoints.Count - 1; i++)
+        {
+            WaterPoint point = waterPoints[i];
+
+            float x = point.pos - point.targetHeight;
+            float acceleration = -springConstant * x - damping * point.velocity;
+            point.pos += point.velocity * speedMult * Time.fixedDeltaTime;
+            verticies[topVerticesIndex[i]].y = point.pos;
+            point.velocity += acceleration * speedMult * Time.fixedDeltaTime;
+        }
+
+        //wave propogation
+        for (int j = 0; j < wavePropogationIterations; j++)
+        {
+            for (int i = 1; i < waterPoints.Count - 1; i++)
+            {
+                float leftDelta = spread * (waterPoints[i].pos - waterPoints[i - 1].pos) * speedMult * Time.fixedDeltaTime;
+                waterPoints[i - 1].velocity += leftDelta;
+
+                float rightDelta = spread * (waterPoints[i].pos - waterPoints[i + 1].pos) * speedMult * Time.fixedDeltaTime;
+                waterPoints[i + 1].velocity += rightDelta;
+            }
+        }
+
+        //update the mesh
+        mesh.vertices = verticies;
+    }
+
+    public void Splash(Collider2D collision, float force)
+    {
+        float radius = collision.bounds.extents.x * playerCollisionRadiusMult;
+        Vector2 center = collision.transform.position;
+
+        for (int i = 0; i < waterPoints.Count; i++)
+        {
+            Vector2 vertexWorldPos = transform.TransformPoint(verticies[topVerticesIndex[i]]);
+
+            if (IsPointInsideCircle(vertexWorldPos, center, radius))
+            {
+                waterPoints[i].velocity = force;
+            }
+        }
+    }
+
+    private bool IsPointInsideCircle(Vector2 point, Vector2 center, float radius)
+    {
+        float distanceSquared = (point - center).sqrMagnitude;
+        return distanceSquared <= radius * radius;
     }
 
     public void ResetEdgeCollider()
@@ -128,6 +205,20 @@ public class InteractableWater : MonoBehaviour
 
         meshFilter.mesh = mesh;
 
+    }
+
+    private void CreateWaterPoints()
+    {
+        waterPoints.Clear();
+
+        for (int i = 0; i < topVerticesIndex.Length; i++)
+        {
+            waterPoints.Add(new WaterPoint
+            {
+                pos = verticies[topVerticesIndex[i]].y,
+                targetHeight = verticies[topVerticesIndex[i]].y,
+            });
+        }
     }
 }
 
