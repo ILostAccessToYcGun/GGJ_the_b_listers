@@ -1787,7 +1787,7 @@ GameObject:
   - component: {fileID: 7401854671428609697}
   - component: {fileID: 5424229663970191122}
   m_Layer: 5
-  m_Name: Yoga
+  m_Name: Maru
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2212,7 +2212,7 @@ GameObject:
   - component: {fileID: 7103322673312306742}
   - component: {fileID: 766562650647598782}
   m_Layer: 5
-  m_Name: Bambi
+  m_Name: Brandon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2265,7 +2265,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 998a1881484bbc74197ab88489d3cf39, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c662b1a15fa7d9e49b691c78fb77f48f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
