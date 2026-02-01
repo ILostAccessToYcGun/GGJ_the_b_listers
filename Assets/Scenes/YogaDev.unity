@@ -258,6 +258,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4368116431523597325, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -458,6 +462,50 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3421734361256249103, guid: 7fcbcd0e041aa944a85c485ed18987d3, type: 3}
   m_PrefabInstance: {fileID: 769070249}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1061626475 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7572568934590051501, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
+  m_PrefabInstance: {fileID: 8274034513922047295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1061626479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061626475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c76d0e7608992d4696ec083b9540d6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  rb: {fileID: 0}
+  engineForce: 3500
+  maxSpeed: 24
+  rotateSpeed: 90
+  engine: 1
+  noiseFrequency: {x: 5, y: 10}
+  noiseStrength: {x: 0.5, y: 3}
+  noise: 1
+  seaLevelDist: 55
+  seaLevelStrength: 1000
+  separationDist: 15
+  runTimer: 0
+  runTime: 2
+  fleeTime: 3
+  runDistance: 50
+--- !u!114 &1341194800 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4487644495259151029, guid: a9f49d03ff4b48b4c9bb8e9d3894dcab, type: 3}
+  m_PrefabInstance: {fileID: 6118002809215336611}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfba7ff8b4e39614780bed920eeb1baf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1551818927
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,17 +774,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1898268875233808486, guid: a9f49d03ff4b48b4c9bb8e9d3894dcab, type: 3}
-      propertyPath: groundMask.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1898268875233808486, guid: a9f49d03ff4b48b4c9bb8e9d3894dcab, type: 3}
-      propertyPath: playerMask.m_Bits
-      value: 833
+      propertyPath: range
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3777827502101873799, guid: a9f49d03ff4b48b4c9bb8e9d3894dcab, type: 3}
       propertyPath: m_Name
       value: YellowEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3777827502101873799, guid: a9f49d03ff4b48b4c9bb8e9d3894dcab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6132363631321817571, guid: a9f49d03ff4b48b4c9bb8e9d3894dcab, type: 3}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 1341194800}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -754,10 +806,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1380683824758399850, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638190365094615606, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
+      propertyPath: range
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2638190365094615606, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1024455465}
+    - target: {fileID: 2638190365094615606, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
+      propertyPath: currentAmmo
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243377502130591462, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
+      propertyPath: range
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243377502130591462, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
+      propertyPath: viewConeAngle
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243377502130591462, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243377502130591462, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
+      propertyPath: playerMask.m_Bits
+      value: 833
+      objectReference: {fileID: 0}
     - target: {fileID: 8202737114736852530, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -798,10 +878,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9176897607578111538, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 1061626479}
+    m_RemovedComponents:
+    - {fileID: 8222395205099426477, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7572568934590051501, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1061626479}
   m_SourcePrefab: {fileID: 100100000, guid: 03bbc052cc9517f4384785439f6c6241, type: 3}
 --- !u!1001 &8948138797984483185
 PrefabInstance:
