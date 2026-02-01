@@ -67,20 +67,20 @@ public class MapGeneration : MonoBehaviour
         for (int i = 1; i < iterations; i++)
         {
             TileBase[,] tempNoiseGrid = (TileBase[,])noiseGrid.Clone();
-            for (int j = 1; j < mapHeight; j++)
+            for (int j = 1; j < mapWidth; j++)
             {
-                for (int k = 1; k < mapWidth; k++)
+                for (int k = 1; k < mapHeight; k++)
                 {
                     int neighborWallCount = 0;
-                    for (int y = j - 1; y <= j + 1; y++)
+                    for (int x = j - 1; x <= j + 1; x++)
                     {
-                        for (int x = k - 1; x <= k + 1; x++)
+                        for (int y = k - 1; y <= k + 1; y++)
                         {
                             if (y >= 0 && x >= 0 && y < mapHeight && x < mapWidth)//later (y >= 0 && x >= 1 && y <= mapHeight && x <= mapWidth - 2)
                             {
-                                if (y != j || x != k)
+                                if (y != k || x != j)
                                 {
-                                    if (tempNoiseGrid[y, x] == wallTile)
+                                    if (tempNoiseGrid[x, y] == wallTile)
                                     {
                                         neighborWallCount += 1;
                                     }
@@ -111,15 +111,15 @@ public class MapGeneration : MonoBehaviour
         //Vector2 tileSize = noiseGrid[0, 0].;
         float yRefection = mapHeight / 2f;
         float xRefection = mapWidth / 2f;
-        for (int x = 1; x < mapWidth; x++)
+        for (int x = 0; x < mapWidth; x++)
         {
-            for (int y = 1; y < mapHeight; y++)
+            for (int y = 0; y < mapHeight; y++)
             {
                 if (noiseGrid[x, y] == wallTile)
                 {
                     wallTilemap.SetTile(new Vector3Int((int)(x - xRefection), (int)(y - yRefection), 0), noiseGrid[x, y]);
                 }
-                else
+                else if (noiseGrid[x, y] == floorTile)
                 {
                     floorTilemap.SetTile(new Vector3Int((int)(x - xRefection), (int)(y - yRefection), 0), noiseGrid[x, y]);
                 }
@@ -136,7 +136,7 @@ public class MapGeneration : MonoBehaviour
         do
         {
             randomTilePos = new Vector3Int(UnityEngine.Random.Range(-mapWidth / 2, mapWidth / 2), UnityEngine.Random.Range(-mapHeight / 2, mapHeight / 2), 0);
-        } while (floorTilemap.GetTile(randomTilePos) == null || wallTilemap.GetTile(randomTilePos));
-        player.transform.position = floorTilemap.CellToWorld(randomTilePos);
+        } while (floorTilemap.GetTile(randomTilePos) == null);
+        player.transform.position = wallTilemap.CellToWorld(randomTilePos);
     }
 }

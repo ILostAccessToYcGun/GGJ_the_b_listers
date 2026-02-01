@@ -447,18 +447,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 378079114764236138, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 378079114764236138, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 378079114764236138, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 956661755874089430, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -499,14 +487,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1575219850040234324, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_SortOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575219850040234324, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_DetectChunkCullingBounds
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4368116431523597325, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
       propertyPath: m_Name
       value: Grid
@@ -515,38 +495,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 67602888}
-    - target: {fileID: 6357269871196399400, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7127889667845859773, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_CellGap.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7127889667845859773, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_CellGap.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7127889667845859773, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_CellSize.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7127889667845859773, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_CellSize.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726858124240092869, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726858124240092869, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726858124240092869, guid: 65ef7d029f93e974e9a3801a756aceac, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
