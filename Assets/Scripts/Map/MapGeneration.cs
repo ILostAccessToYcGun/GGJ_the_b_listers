@@ -16,6 +16,8 @@ public class MapGeneration : MonoBehaviour
 
     [SerializeField] Tilemap wallTilemap;
     [SerializeField] Tilemap floorTilemap;
+    [SerializeField] Tilemap seaTilemap;
+    [SerializeField] Tilemap cloudsTilemap;
     [SerializeField] TileBase floorTile;
     [SerializeField] TileBase wallTile;
     [SerializeField] TileBase cloudTile;
@@ -108,14 +110,17 @@ public class MapGeneration : MonoBehaviour
 
     void drawMap()
     {
-        //Vector2 tileSize = noiseGrid[0, 0].;
         float yRefection = mapHeight / 2f;
         float xRefection = mapWidth / 2f;
         for (int x = 0; x < mapWidth; x++)
         {
             for (int y = 0; y < mapHeight; y++)
             {
-                if (noiseGrid[x, y] == wallTile)
+                if (y < 10)
+                {
+                    seaTilemap.SetTile(new Vector3Int((int)(x - xRefection), (int)(y - yRefection), 0), seaTile);
+                }
+                else if (noiseGrid[x, y] == wallTile)
                 {
                     wallTilemap.SetTile(new Vector3Int((int)(x - xRefection), (int)(y - yRefection), 0), noiseGrid[x, y]);
                 }
