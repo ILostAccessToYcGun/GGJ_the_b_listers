@@ -4,7 +4,7 @@ public class MissileSilo : WeaponBase
 {
     [Header("MissileSilo Stats")]
     [Range(0f, 15f)][SerializeField] float accuracy; //the angle variation in degrees
-    [SerializeField] GameObject target;
+    public GameObject target;
 
     [Header("Missile Stats")]
     [SerializeField] float homingStrength;
