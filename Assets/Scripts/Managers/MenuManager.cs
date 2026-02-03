@@ -17,7 +17,7 @@ public class MenuManager : MonoBehaviour
     //load into the first scene once the player presses "Start Game"
     public void PlayButton()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SampleScene");  //SampleScene
     }
 
     //Quit button
